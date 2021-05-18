@@ -1,3 +1,5 @@
+package Exercise4__5;
+
 public abstract class Fruit {
 	
 	protected String name; //universe cannot access the data

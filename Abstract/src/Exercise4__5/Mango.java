@@ -1,42 +1,65 @@
+package Exercise4__5;
+
 import java.util.Scanner;
-public class Apple extends Fruit implements discount{
+
+public class Mango extends Fruit {
     
     protected int quantity;
     protected double price,paid,amountTendered,balance;
     Scanner sc=new Scanner(System.in);
-    
-    public double promotion() {
-	      return 0.85;	
-	}
-    
-    public Apple(String name, int q, double p) { //constructor with arguments
+  
+    public Mango(String name) { //constructor with arguments
         super(name);
-        this.quantity = q;
-        this.price = p;
+        System.out.println("Price for each Mango is 1.00");
+        this.price = 1;
+        System.out.println("Please enter quantity that you want to buy");
+        this.quantity = sc.nextInt();
         
         //System.out.println("Apple constructor is invoked");
     
-        if (this.quantity < 10) {
-            totalPrice(); //overloading with no arguments
+        if (this.quantity <= 10) {
+        	totalPrice(); //overloading with no arguments
             System.out.println(name);
             paid=totalPrice();
         
         }
-            else if (this.quantity > 10 && this.quantity < 100) {
-            double pp = 0.90;
+        
+        else if (this.quantity > 10 && this.quantity < 100) {
+            double pp = 0.80;
             totalPrice(pp); //overloading with 1 argument
+            System.out.println("Because you buy more than 10 and less than 100, you will get special price which 1 Mango = 0.80 sen");
             System.out.println(name);
-            System.out.println("Because you buy more than 10 and less than 100, you will get 0.15% discount");
             paid=totalPrice(pp);
         }
         
+        else {
+        	double pp = 0.70;
+            double dd; 
+            
+            if (name == "Apple") {
+            	Discount aa = new Applediscount();
+            	System.out.println("Because you buy more than 100, you will get 0.15% and you will get special price which 1 apple = 0.80 sen");
+				System.out.println("DISCOUNT 1: "+aa.rateofdiscount()); 
+				dd = aa.rateofdiscount();
+            }
+            
+            else if (name == "HoneyCrisp") {
+            	Discount aa = new HoneyCrispdiscount();
+            	System.out.println("Because you buy more than 100, you will get 0.25% and you will get special price which 1 apple = 0.80 sen");
+				System.out.println("DISCOUNT 2: "+aa.rateofdiscount()); 
+				dd = aa.rateofdiscount();
+            }
+            
             else {
-            double discount = 0.70;
-            int qq = 100; //beli la byk mana pun, kuantiti tetap kira 100
-            totalPrice(qq, discount); //overloading with 2 arguments
+            	Discount aa = new Mangodiscount();
+            	System.out.println("Because you buy more than 100, you will get 0.35% and you will get special price which 1 Mango = 0.70 sen");
+				System.out.println("DISCOUNT 3: "+aa.rateofdiscount()); 
+				dd = aa.rateofdiscount(); 	 
+            }
+            
+            totalPrice(dd, pp); //overloading with 2 arguments
             System.out.println(name);
-            System.out.println("Because you buy more than 100, you will get 0.30% discount and we just calculate using 100 apples only");
-            paid=totalPrice(discount,qq);
+            paid=totalPrice(pp,dd);
 		}
         
         System.out.println("You bought:");
@@ -70,11 +93,11 @@ public class Apple extends Fruit implements discount{
 	}
 	
 	public double totalPrice(double pp) {
-		return pp* this.quantity * promotion();
+		return pp* this.quantity ;
 	}
 	
-	public double totalPrice(double qq, double discount) {
-		return this.price* qq * discount;
+	public double totalPrice(double pp, double dd) {
+		return (pp* this.quantity * (1-dd)) ;
 	}
 	
 	public String toString(){

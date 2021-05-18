@@ -1,4 +1,6 @@
-public class Main{
+package Exercise4__5;
+
+public class main{
 	
 	public static void main(String[]args) {
 		System.out.println();

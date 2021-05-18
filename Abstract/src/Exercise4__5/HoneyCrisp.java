@@ -1,5 +1,6 @@
+package Exercise4__5;
 
-public class HoneyCrisp extends Apple implements discount {
+public class HoneyCrisp extends Apple {
 
 
 	private String taste;
@@ -29,3 +30,4 @@ public class HoneyCrisp extends Apple implements discount {
 
 
 }
+
